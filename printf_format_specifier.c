@@ -4,15 +4,12 @@
 
 int main() {
 
-    size_t size_t_is_unsigned_integer_of_8bytes;
+    size_t * size_t_is_unsigned_integer_of_8bytes = calloc(1, sizeof * size_t_is_unsigned_integer_of_8bytes);
+
     /*void * calloc(size_t number_of_bytes_size, size_t bytes_size);*/
-    void * (* contigous_sequence_memory_allocation)(size_t, size_t) = calloc;
+    void * (* contiguous_sequence_memory_allocation)(size_t, size_t) = calloc;
 
-    contigous_sequence_memory_allocation = calloc(1, sizeof size_t_is_unsigned_integer_of_8bytes);
-
-
-    //size_t * size_t_unsigned_integer_8bytes = calloc(1, sizeof * size_t_unsigned_integer_8bytes);
-
+    contiguous_sequence_memory_allocation = calloc(1, sizeof * size_t_is_unsigned_integer_of_8bytes);
     /*
     printf format specifier %d and %i are act interchangeable/identically (both print a signed decimal integer)
  
@@ -35,8 +32,8 @@ int main() {
 
     printf("%i\n", size_t_is_unsigned_integer_of_8bytes);
 
-    free(contigous_sequence_memory_allocation);
-    pointer_to_calloc_function = NULL;
+    free(contiguous_sequence_memory_allocation);
+    contiguous_sequence_memory_allocation = NULL;
     return 0;
 
 }

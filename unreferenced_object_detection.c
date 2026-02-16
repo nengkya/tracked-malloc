@@ -1,28 +1,30 @@
-#include "stdlib.h" /*malloc*/
+#include "stdlib.h"
 #include <stdio.h>
+
+
+struct object {
+
+    void * void_pointer;
+
+    int marked;
+
+};
+
+
+static struct object object_registry[10];
+
+static int registry_count = 0;
 
 
 void * tracked_malloc(size_t bytes_size) {
 
-    /*
-    int    is a      sign integer; 4 bytes on x64
-    size_t is an unsigned integer; 8 bytes on x64
-
-    int            is general-purpose integer arithmetic
-    size_t purpose is to represents sizes, array indices, and results of sizeof
-    */
-
-    printf("sizeof(int   )   signed integer = %d bytes \n", sizeof(int   ));
-    printf("sizeof(size_t) unsigned integer = %d bytes with %% d print format specifier \n", sizeof(size_t));
-
-    /*
-    printf("%modifier:format_specifier");
-    printf("%size_t:unsigned");
-    printf("%zu");
-    */
-    printf("sizeof(size_t) unsigned integer = %zu bytes with %%zu print format specifier\n", sizeof(size_t));
-
     void * allocated_memory = (void *)malloc(bytes_size);
+
+    object_registry[registry_count].void_pointer = allocated_memory;
+
+    object_registry[registry_count].marked = 0;
+
+    registry_count++;
 
     free(allocated_memory);
     allocated_memory = NULL;
@@ -32,7 +34,8 @@ void * tracked_malloc(size_t bytes_size) {
 
 int main() {
 
-    int * a = (int *)tracked_malloc(sizeof(int));
+    int * tracked_pointer1 = (int *)tracked_malloc(sizeof(int));
+    int * tracked_pointer2;
 
     return 0;
 
